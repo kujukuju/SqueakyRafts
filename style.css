@@ -1,0 +1,367 @@
+html, body {
+    position: relative;
+    padding: 0;
+    margin: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+div {
+    user-select: none;
+}
+
+input {
+    user-select: none;
+}
+
+button {
+    user-select: none;
+}
+
+img {
+    image-rendering: pixelated;
+}
+
+.mainmenuHolder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    padding: 0;
+}
+
+.mainmenuHolder .mainmenu {
+    position: absolute;
+    top: calc(50vh - 40vmin);
+    left: calc(50vw - 40vmin);
+
+    width: 80vmin;
+    height: 80vmin;
+    font-family: 'Aloevera', sans-serif;
+
+    padding: 5vmin 10vmin;
+    box-sizing: border-box;
+
+    background-image: url('assets/mainmenu-background.png');
+    background-size: 80vmin 80vmin;
+    image-rendering: pixelated;
+
+    z-index: 10;
+}
+
+.mainmenuHolder .mainmenu h1 {
+    display: block;
+    font-size: 8vmin;
+    padding: 0;
+    margin: 0;
+    line-height: 8vmin;
+    text-align: center;
+}
+
+.mainmenuHolder .mainmenu .inputHolder {
+    display: block;
+    width: 100%;
+}
+
+.mainmenuHolder .mainmenu .inputHolder .usernameText {
+    display: block;
+    margin: 4vmin auto 0 auto;
+    font-size: 3vmin;
+    border: none;
+    width: 40%;
+}
+
+.mainmenuHolder .mainmenu .inputHolder input {
+    display: block;
+    margin: 0 auto 4vmin auto;
+    font-size: 2vmin;
+    border: none;
+    width: 40%;
+    font-family: 'Aloevera', sans-serif;
+    border-radius: 4px;
+}
+
+.mainmenuHolder .mainmenu .instructions {
+    display: flex;
+}
+
+.mainmenuHolder .mainmenu .instructions .instruction {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+
+    padding: 1vmin;
+    box-sizing: border-box;
+}
+
+.mainmenuHolder .mainmenu .instructions .instruction .instructionTitle {
+    font-size: 3vmin;
+    margin-bottom: 2vmin;
+}
+
+.mainmenuHolder .mainmenu .instructions .instruction .instructionDescription {
+    font-size: 1.5vmin;
+    margin-bottom: 2vmin;
+}
+
+.mainmenuHolder .mainmenu .options {
+    display: flex;
+    margin-top: 10vmin;
+}
+
+.mainmenuHolder .mainmenu .options .option {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+
+    padding: 1vmin;
+    box-sizing: border-box;
+
+    /* width: 30vmin;
+    height: 30vmin; */
+}
+
+.mainmenuHolder .mainmenu .options .option.empty {
+    flex-shrink: 1;
+    flex-grow: 0;
+}
+
+.mainmenuHolder .mainmenu .options .option .wrap {
+    position: relative;
+}
+
+.mainmenuHolder .mainmenu .options .option .wrap img {
+    width: 100%;
+    height: 100%;
+}
+
+.mainmenuHolder .mainMenu .musicContainer {
+    position: absolute;
+    top: 4vmin;
+    right: 4vmin;
+
+    width: 6vmin;
+    height: 6vmin;
+}
+
+.mainmenuHolder .mainMenu .musicContainer img {
+    width: 100%;
+    height: 100%;
+}
+
+.twitchStream {
+    position: absolute;
+    top: -200%;
+    right: calc(50vw - 40vmin + 80vmin - 14vmin);
+
+    padding: 9.23vmin 18.46vmin 9.23vmin 9.23vmin;
+
+    font-family: 'Aloevera', sans-serif;
+    font-size: 3.08vmin;
+    transform-origin: left;
+
+    background-image: url('/assets/mainmenu-side-background.png');
+    background-size: 100% 100%;
+    image-rendering: pixelated;
+
+    transform: translateY(-50%) scale(0.65);
+    transform-origin: right;
+    /* border-width: 8px 12px 8px 12px; */
+}
+
+.twitchStream.visible {
+    top: 50%;
+}
+
+.twitchStream.visible.vertical {
+    top: calc(50vh - 40vmin - 13.3vmin);
+    right: calc(50vw - 4vmin);
+
+    padding: 12vmin 12vmin 24vmin 12vmin;
+
+    transform: translateY(-50%) scale(0.51);
+    transform-origin: right;
+}
+
+.twitchStream .twitchTitle {
+
+}
+
+.twitchStream iframe {
+    border-radius: 12px;
+    border: 4px solid #493318;
+    overflow: hidden;
+
+    max-height: 50vh;
+}
+
+.twitchStream.vertical iframe {
+    max-height: none;
+    max-width: 62.75vw;
+    height: auto;
+}
+
+.steam {
+    position: absolute;
+    top: 50%;
+    left: calc(50vw - 40vmin + 80vmin - 14vmin);
+
+    padding: 12vmin 12vmin 12vmin 24vmin;
+
+    font-family: 'Aloevera', sans-serif;
+    font-size: 4vmin;
+
+    transform: translateY(-50%) scale(0.5);
+    transform-origin: left;
+
+    background-image: url('/assets/mainmenu-side-background.png');
+    background-size: 100% 100%;
+    image-rendering: pixelated;
+}
+
+.steam.vertical {
+    top: calc(50vh - 40vmin - 14vmin);
+    left: calc(50% - 2vmin);
+
+    padding: 12vmin 12vmin 24vmin 12vmin;
+
+    transform: translateY(-50%) scale(0.4);
+    transform-origin: left;
+}
+
+.steam .steamTitle {
+
+}
+
+.steam img {
+    border: 4px solid #493318;
+    border-radius: 12px;
+    overflow: hidden;
+
+    max-height: 50vh;
+    width: auto;
+}
+
+.steam.vertical img {
+    max-height: none;
+    max-width: 80vw;
+    height: auto;
+}
+
+.hoverImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0%;
+
+    transition: 100ms opacity ease;
+
+    z-index: 10;
+}
+
+.hoverImage.voice:hover {
+    opacity: 50%;
+}
+
+.hoverImage.music:hover {
+    opacity: 50%;
+}
+
+.hoverImage.play:hover {
+    opacity: 100%;
+}
+
+.hoverImage.voice.enabled {
+    opacity: 100%;
+}
+
+.hoverImage.music.enabled {
+    opacity: 100%;
+}
+
+.mobileControls {
+    position: absolute;
+    width: 30vmin;
+    height: 30vmin;
+}
+
+.mobileControls.left {
+    left: 4vmin;
+    bottom: 4vmin;
+}
+
+.mobileControls.right {
+    right: 4vmin;
+    bottom: 4vmin;
+}
+
+.squeakyRaftsBottomLarge {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+
+    transform: translateX(-50%) translateY(-100%);
+
+    /* width: 970px;
+    height: 90px;
+
+    background-color: #ff0000; */
+}
+
+.squeakyRaftsBottomLarge.playing,
+.squeakyRaftsBottomLarge.wrongsize {
+    display: none;
+}
+
+.squeakyRaftsBottomSmall {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+
+    transform: translateX(-50%) translateY(-100%);
+
+    /* width: 320px;
+    height: 100px;
+
+    background-color: #00ff00; */
+}
+
+.squeakyRaftsBottomSmall.playing,
+.squeakyRaftsBottomSmall.wrongsize {
+    display: none;
+}
+
+div::-webkit-scrollbar {
+    width: 0.25rem;
+
+    margin-left: 0.25rem;
+
+    opacity: 0;
+}
+
+div.hover::-webkit-scrollbar, div:hover::-webkit-scrollbar {
+    opacity: 1;
+}
+
+div::-webkit-scrollbar-track {
+    border-radius: 0.125rem;
+
+    background-color: rgba(0, 0, 0, 0);
+}
+
+div::-webkit-scrollbar-thumb {
+    border-radius: 0.125rem;
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+@font-face {
+    font-family: Aloevera;
+    font-style: normal;
+    src: url('assets/Aloevera-OVoWO.ttf') format('truetype');
+}

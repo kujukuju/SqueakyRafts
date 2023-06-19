@@ -1,0 +1,187 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+
+        <title>Squeaky Rafts</title>
+
+        <link rel="preload" href="assets/Aloevera-OVoWO.ttf" as="font" type="font/ttf">
+        <link rel="preload" href="style.css" as="style">
+        <link rel="preload" href="chat.css" as="style">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="chat.css">
+
+        <script>
+            const MOBILE = (typeof window.orientation !== 'undefined') || (navigator.userAgent.indexOf('IEMobile') !== -1);
+        </script>
+
+        <script src="libs/box2d.js"></script>
+        <script src="libs/nswa.js"></script>
+        <script src="libs/pixi.js"></script>
+        <script src="libs/pixelscan.js"></script>
+
+        <script src="src/Initialize.js"></script>
+        <script src="src/VoiceEntity.js"></script>
+        <script src="src/SurfaceColorShader.js"></script>
+
+        <script src="src/underwater/HoleA.js"></script>
+        <script src="src/underwater/HoleB.js"></script>
+        <script src="src/underwater/HoleC.js"></script>
+        <script src="src/underwater/Kelp.js"></script>
+        <script src="src/underwater/PinkSponge.js"></script>
+        <script src="src/underwater/SunkenShip.js"></script>
+        <script src="src/AudioInformation.js"></script>
+        <script src="src/BetterParallaxSprite.js"></script>
+        <script src="src/WinManager.js"></script>
+        <script src="src/BetterWaterShader.js"></script>
+        <script src="src/BoulderManager.js"></script>
+        <script src="src/BreakableBoulder.js"></script>
+        <script src="src/ChatManager.js"></script>
+        <script src="src/ChoppableTree.js"></script>
+        <script src="src/Connection.js"></script>
+        <script src="src/CullOptimizer.js"></script>
+        <script src="src/DeadPleb.js"></script>
+        <script src="src/DeathScreen.js"></script>
+        <script src="src/EntityInformation.js"></script>
+        <script src="src/Environment.js"></script>
+        <script src="src/GhostedHarpoonPart.js"></script>
+        <script src="src/GhostedPaddlePart.js"></script>
+        <script src="src/GhostedRaftPart.js"></script>
+        <script src="src/GunBullet.js"></script>
+        <script src="src/GunBulletManager.js"></script>
+        <script src="src/HarpoonBullet.js"></script>
+        <script src="src/HarpoonBulletManager.js"></script>
+        <script src="src/HarpoonPart.js"></script>
+        <script src="src/Information.js"></script>
+        <script src="src/InstructionPage.js"></script>
+        <script src="src/IslandManager.js"></script>
+        <script src="src/Logic.js"></script>
+        <script src="src/Loop.js"></script>
+        <script src="src/MainMenu.js"></script>
+        <script src="src/MapManager.js"></script>
+        <script src="src/MathHelper.js"></script>
+        <script src="src/MicInput.js"></script>
+        <script src="src/MobileControls.js"></script>
+        <script src="src/MoonEntity.js"></script>
+        <script src="src/PacketProcessor.js"></script>
+        <script src="src/Packets.js"></script>
+        <script src="src/PaddlePart.js"></script>
+        <script src="src/ParallaxManager.js"></script>
+        <script src="src/PhysicsManager.js"></script>
+        <script src="src/PlebDeathManager.js"></script>
+        <script src="src/PlebEntity.js"></script>
+        <script src="src/Raft.js"></script>
+        <script src="src/RaftManager.js"></script>
+        <script src="src/RaftPart.js"></script>
+        <script src="src/RaftPartManager.js"></script>
+        <script src="src/Renderer.js"></script>
+        <script src="src/RockManager.js"></script>
+        <script src="src/RockObject.js"></script>
+        <script src="src/Shark.js"></script>
+        <script src="src/SharkManager.js"></script>
+        <script src="src/TreeManager.js"></script>
+        <script src="src/Utilities.js"></script>
+        <script src="src/WaitScreen.js"></script>
+        <script src="src/WoodManager.js"></script>
+        <script src="src/WoodObject.js"></script>
+
+        <script src="https://embed.twitch.tv/embed/v1.js"></script>
+    </head>
+    <body>
+        <div id="canvas-container"></div>
+        <img src="/assets/buttons-left.png" class="mobileControls left" style="display:none;" id="mobile-left" draggable="false" />
+        <img src="/assets/buttons-right.png" class="mobileControls right" style="display:none;" id="mobile-right" draggable="false" />
+        <div class="chatContainer">
+            <div class="chat" id="chat-parent" style="display:none;">
+                <div class="chatContainer" id="chat-container">
+                </div>
+                <div class="chatBottom">
+                    <div class="sayText" id="chat-say">Say:</div>
+                    <div class="inputContainer">
+                        <!-- the maxlength here must match the js value -->
+                        <input type="text" class="input" id="chat-input" maxlength="240">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mainmenuHolder" style="display:block;" id="main-menu">
+            <div class="mainmenu">
+                <h1>Squeaky Rafts</h1>
+                <div class="inputHolder">
+                    <div class="usernameText">Username</div>
+                    <input type="text" id="username" name="squeaky-username" maxlength="16">
+                </div>
+                <div class="instructions">
+                    <div class="instruction">
+                        <div class="instructionTitle">Q</div>
+                        <div class="instructionDescription">
+                            Hold Q to open your map!
+                        </div>
+                    </div>
+                    <div class="instruction">
+                        <div class="instructionTitle">E</div>
+                        <div class="instructionDescription">
+                            Hold to punch rocks and trees!
+                        </div>
+                        <div class="instructionDescription">
+                            Hold to use paddles!
+                        </div>
+                        <div class="instructionDescription">
+                            Press to interact with things!
+                        </div>
+                    </div>
+                    <div class="instruction">
+                        <div class="instructionTitle">F</div>
+                        <div class="instructionDescription">
+                            Press to pick up things!
+                        </div>
+                        <div class="instructionDescription">
+                            Press to drop things!
+                        </div>
+                    </div>
+                    <div class="instruction">
+                        <div class="instructionTitle">T</div>
+                        <div class="instructionDescription">
+                            Push to talk for voice chat!
+                        </div>
+                    </div>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <div class="wrap">
+                            <img src="/assets/mainmenu-voice-chat.png" draggable="false" />
+                            <img src="/assets/mainmenu-voice-chat-hover.png" class="hoverImage voice" id="voice-chat-hover" draggable="false" />
+                        </div>
+                    </div>
+                    <div class="option empty">
+                    </div>
+                    <div class="option">
+                        <div class="wrap">
+                            <img src="/assets/mainmenu-play.png" draggable="false" />
+                            <img src="/assets/mainmenu-play-hover.png" class="hoverImage play" id="play-hover" draggable="false" />
+                        </div>
+                    </div>
+                </div>
+                <div class="musicContainer">
+                    <img src="/assets/music.png" draggable="false" />
+                    <img src="/assets/music-hover.png" class="hoverImage music" id="music-hover" draggable="false" />
+                </div>
+            </div>
+        </div>
+        <div class="twitchStream visible" id="twitch-embed">
+            <div class="twitchTitle">Watch the developer stream!</div>
+            <div id="actual-embed"></div>
+        </div>
+        <div class="steam" id="steam">
+            <div class="steamTitle">Wishlist my next game on steam!</div>
+            <a target="_blank" href="https://store.steampowered.com/app/2125410/Into_the_Spiritwell/?origin=squeakyrafts.io&format=capsule">
+                <img src="assets/main_capsule.png" alt="into the spiritwell capsule art" />
+            </a>
+        </div>
+        <div class="squeakyRaftsBottomLarge wrongsize" id="squeakyrafts-io_970x90"></div>
+        <div class="squeakyRaftsBottomSmall wrongsize" id="squeakyrafts-io_320x100"></div>
+    </body>
+</html>

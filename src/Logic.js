@@ -102,6 +102,7 @@ class Logic {
         // }
 
         Input.clear();
+        MobileControls.clear();
     }
 
     // static sunkenShipPoints = [];

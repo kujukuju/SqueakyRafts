@@ -75,10 +75,12 @@ class MainMenu {
             parent: ['iogames.space', 'titotu.ru', 'iogames.fun', 'titotu.io', 'yandex.ru', 'io.games', 'io-games.io', 'games.crazygames.com', 'crazygames.com'],
         });
         MainMenu.embedStream.addEventListener(Twitch.Player.OFFLINE, event => {
+            MainMenu.twitchStreamElement.style.display = 'none';
             MainMenu.streamOnline = false;
             MainMenu.resize();
         });
         MainMenu.embedStream.addEventListener(Twitch.Player.ONLINE, event => {
+            MainMenu.twitchStreamElement.style.display = 'block';
             MainMenu.streamOnline = true;
 
             const quality = MainMenu.embedStream.getQualities().sort((a, b) => a.bitrate - b.bitrate)[0].name;
@@ -107,6 +109,7 @@ class MainMenu {
                 MainMenu.aBottomSmallElement.classList.remove('wrongsize');
 
                 MainMenu.refreshContent();
+                MainMenu.resize();
             }
         } else {
             if (MainMenu.mainMenuElement.style.display !== 'none') {
@@ -132,10 +135,6 @@ class MainMenu {
     }
 
     static resize() {
-        if (MainMenu.streamOnline) {
-            MainMenu.twitchStreamElement.style.display = 'block';
-        }
-
         if (window.innerHeight > window.innerWidth) {
             MainMenu.twitchStreamElement.classList.add('vertical');
             MainMenu.steamElement.classList.add('vertical');

@@ -535,8 +535,18 @@ const PixelScan = (function() {
         }
     
         static getMousePosition() {
-            const percentX = Input.mousePosition.x / window.innerWidth;
-            const percentY = Input.mousePosition.y / window.innerHeight;
+            let percentX = Input.mousePosition.x / window.innerWidth;
+            let percentY = Input.mousePosition.y / window.innerHeight;
+            if (MOBILE) {
+                for (const touchID in MobileControls.touches) {
+                    const touch = MobileControls.touches[touchID];
+                    if (!touch.consumed) {
+                        percentX = touch.x / window.innerWidth;
+                        percentY = touch.y / window.innerHeight;
+                        break;
+                    }
+                }
+            }
         
             return Vec2.set(Camera.aabb.x + Camera.aabb.width * percentX, Camera.aabb.y + Camera.aabb.height * percentY).round();
         };

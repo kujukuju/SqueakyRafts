@@ -538,7 +538,7 @@ s
 
                     Packets.writeHarpoonDirectionPacket(raft.id, this.interactingOffsets.x, this.interactingOffsets.y, harpoon.localDirection.x, harpoon.localDirection.y);
 
-                    if (Input.mouseDownLeft & Input.DELTA_DOWN) {
+                    if (Input.mouseDownLeft & Input.DELTA_DOWN || MobileControls.hasNewTouch()) {
                         harpoon.fire(raft, worldDirection, true);
                     }
                 }

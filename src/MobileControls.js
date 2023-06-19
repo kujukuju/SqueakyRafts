@@ -32,6 +32,7 @@ class MobileControls {
                 for (let i = 0; i < event.changedTouches.length; i++) {
                     const touch = event.changedTouches[i];
                     MobileControls.touches[touch.identifier] = new Vec2(touch.clientX, touch.clientY);
+                    MobileControls.touches[touch.identifier].new = true;
                 }
 
                 event.preventDefault();
@@ -115,15 +116,30 @@ class MobileControls {
         for (const touchID in MobileControls.touches) {
             const touch = MobileControls.touches[touchID];
 
-            leftLeftTouch = leftLeftTouch || leftLeftPoint.distance(touch) < radius;
-            leftRightTouch = leftRightTouch || leftRightPoint.distance(touch) < radius;
-            leftTopTouch = leftTopTouch || leftTopPoint.distance(touch) < radius;
-            leftBottomTouch = leftBottomTouch || leftBottomPoint.distance(touch) < radius;
+            const leftLeftTouching = leftLeftPoint.distance(touch) < radius;
+            const leftRightTouching = leftRightPoint.distance(touch) < radius;
+            const leftTopTouching = leftTopPoint.distance(touch) < radius;
+            const leftBottomTouching = leftBottomPoint.distance(touch) < radius;
 
-            rightLeftTouch = rightLeftTouch || rightLeftPoint.distance(touch) < radius;
-            rightRightTouch = rightRightTouch || rightRightPoint.distance(touch) < radius;
-            rightTopTouch = rightTopTouch || rightTopPoint.distance(touch) < radius;
-            rightBottomTouch = rightBottomTouch || rightBottomPoint.distance(touch) < radius;
+            const rightLeftTouching = rightLeftPoint.distance(touch) < radius;
+            const rightRightTouching = rightRightPoint.distance(touch) < radius;
+            const rightTopTouching = rightTopPoint.distance(touch) < radius;
+            const rightBottomTouching = rightBottomPoint.distance(touch) < radius;
+
+            leftLeftTouch = leftLeftTouch || leftLeftTouching;
+            leftRightTouch = leftRightTouch || leftRightTouching;
+            leftTopTouch = leftTopTouch || leftTopTouching;
+            leftBottomTouch = leftBottomTouch || leftBottomTouching;
+
+            rightLeftTouch = rightLeftTouch || rightLeftTouching;
+            rightRightTouch = rightRightTouch || rightRightTouching;
+            rightTopTouch = rightTopTouch || rightTopTouching;
+            rightBottomTouch = rightBottomTouch || rightBottomTouching;
+
+            touch.consumed = false;
+            if (leftLeftTouching || leftRightTouching || leftTopTouching || leftBottomTouching || rightLeftTouching || rightRightTouching || rightTopTouching || rightBottomTouching) {
+                touch.consumed = true;
+            }
         }
 
         if (leftLeftTouch) {
@@ -205,5 +221,23 @@ class MobileControls {
         } else {
             Input.keys[Input.KEY_E] = Input.NONE;
         }
+    }
+
+    static clear() {
+        for (const touchID in MobileControls.touches) {
+            const touch = MobileControls.touches[touchID];
+            touch.new = false;
+        }
+    }
+
+    static hasNewTouch() {
+        for (const touchID in MobileControls.touches) {
+            const touch = MobileControls.touches[touchID];
+            if (touch.new && !touch.consumed) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

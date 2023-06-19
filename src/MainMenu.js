@@ -70,7 +70,7 @@ class MainMenu {
             muted: true,
             autoplay: true,
             layout: 'video',
-            channel: 'crazymango_vr',
+            channel: 'kujukuju',
             // only needed if your site is also embedded on embed.example.com and othersite.example.com
             parent: ['iogames.space', 'titotu.ru', 'iogames.fun', 'titotu.io', 'yandex.ru', 'io.games', 'io-games.io', 'games.crazygames.com', 'crazygames.com'],
         });

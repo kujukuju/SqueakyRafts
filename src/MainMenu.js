@@ -10,6 +10,7 @@ class MainMenu {
     static streamOnline = false;
     static embedStream;
     static steamElement;
+    static linksElement;
 
     static aBottomLargeElement;
     static aBottomSmallElement;
@@ -22,6 +23,24 @@ class MainMenu {
         MainMenu.steamElement = document.getElementById('steam');
         MainMenu.aBottomLargeElement = document.getElementById('squeakyrafts-io_970x90');
         MainMenu.aBottomSmallElement = document.getElementById('squeakyrafts-io_320x100');
+
+        MainMenu.linksElement = document.getElementById('links');
+        const linksMoreElement = document.getElementById('links-more');
+        const linksCloseElement = document.getElementById('links-close');
+        linksMoreElement.onclick = () => {
+            if (MainMenu.linksElement.classList.contains('open')) {
+                MainMenu.linksElement.classList.remove('open');
+            } else {
+                MainMenu.linksElement.classList.add('open');
+            }
+        };
+        linksCloseElement.onclick = () => {
+            if (MainMenu.linksElement.classList.contains('open')) {
+                MainMenu.linksElement.classList.remove('open');
+            } else {
+                MainMenu.linksElement.classList.add('open');
+            }
+        };
 
         const voiceChatElement = document.getElementById('voice-chat-hover');
         voiceChatElement.onclick = () => {
@@ -104,6 +123,7 @@ class MainMenu {
 
                 MainMenu.twitchStreamElement.classList.add('visible');
                 MainMenu.steamElement.style.display = 'block';
+                MainMenu.linksElement.style.display = 'block';
 
                 MainMenu.aBottomLargeElement.classList.remove('playing');
                 MainMenu.aBottomSmallElement.classList.remove('wrongsize');
@@ -117,6 +137,7 @@ class MainMenu {
 
                 MainMenu.twitchStreamElement.classList.remove('visible');
                 MainMenu.steamElement.style.display = 'none';
+                MainMenu.linksElement.style.display = 'none';
                 MainMenu.embedStream.setMuted(true);
 
                 MainMenu.aBottomLargeElement.classList.add('playing');

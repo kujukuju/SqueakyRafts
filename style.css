@@ -300,6 +300,58 @@ img {
     bottom: 4vmin;
 }
 
+.links {
+    position: absolute;
+    bottom: 2vmin;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 2vmin;
+    font-family: Aloevera, sans-serif;
+    color: #493318;
+    z-index: 10;
+}
+
+.links .linksMore {
+    display: block;
+    cursor: pointer;
+}
+
+.links .linksMore:hover {
+    color: #000000;
+}
+
+.links.open .linksMore {
+    display: none;
+}
+
+.links .linksLinks {
+    display: none;
+}
+
+.links.open .linksLinks {
+    display: block;
+}
+
+.links .linksLinks .linksClose {
+    cursor: pointer;
+}
+
+.links .linksLinks .linksClose:hover {
+    color: #000000;
+}
+
+.links a {
+    display: block;
+    text-decoration: none;
+    color: #493318;
+}
+
+.links a:hover {
+    color: #000000;
+}
+
 .squeakyRaftsBottomLarge {
     position: absolute;
     top: 100%;

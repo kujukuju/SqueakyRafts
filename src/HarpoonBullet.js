@@ -40,7 +40,7 @@ class HarpoonBullet {
             if (Information.moon) {
                 potentialSharkHit.shot(this.start);
             }
-s
+
             this.destroy();
             destroyed = true;
         }

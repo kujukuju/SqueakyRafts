@@ -342,6 +342,10 @@ img {
     color: #000000;
 }
 
+.foreverClosed {
+    display: none !important;
+}
+
 .links a {
     display: block;
     text-decoration: none;

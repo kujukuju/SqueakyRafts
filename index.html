@@ -25,6 +25,7 @@
 
         <script>
             const MOBILE = (typeof window.orientation !== 'undefined') || (navigator.userAgent.indexOf('IEMobile') !== -1);
+            const IFRAME_ORIGIN = (window.location !== window.parent.location) ? document.referrer : null;
         </script>
 
         <script src="libs/box2d.js"></script>
@@ -161,7 +162,7 @@
                 <div class="options">
                     <div class="option">
                         <div class="wrap">
-                            <img src="/assets/mainmenu-voice-chat.png" draggable="false" />
+                            <img src="/assets/mainmenu-voice-chat.png" id="voice-chat-normal" draggable="false" />
                             <img src="/assets/mainmenu-voice-chat-hover.png" class="hoverImage voice" id="voice-chat-hover" draggable="false" />
                         </div>
                     </div>

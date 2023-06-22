@@ -42,6 +42,10 @@ class MainMenu {
             }
         };
 
+        if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
+            MainMenu.linksElement.classList.add('foreverClosed');
+        }
+
         const voiceChatElement = document.getElementById('voice-chat-hover');
         voiceChatElement.onclick = () => {
             MainMenu.voiceChatEnabled = !MainMenu.voiceChatEnabled;
@@ -56,12 +60,41 @@ class MainMenu {
             }
         };
 
+        if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
+            document.getElementById('voice-chat-normal').classList.add('foreverClosed');
+            voiceChatElement.classList.add('foreverClosed');
+        }
+
         const playElement = document.getElementById('play-hover');
         playElement.onclick = () => {
             MainMenu.mainMenuVisible = false;
             MainMenu.username = MainMenu.usernameElement.value.trim();
             if (MainMenu.username.length > 16) {
                 MainMenu.username.length = 16;
+            }
+            
+            if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
+                const spaceCharCode = ' '.charCodeAt(0);
+                const tabCharCode = '\t'.charCodeAt(0);
+                for (let index = 0; index < MainMenu.username.length; index++) {
+                    while (index > 0 && (MainMenu.username.charCodeAt(index - 1) !== spaceCharCode && MainMenu.username.charCodeAt(index - 1) !== tabCharCode) && index < MainMenu.username.length) {
+                        index += 1;
+                    }
+
+                    // now the index is a valid location for checking profanity
+                    for (let len = 1; len < ChatManager.extremeLongestProfanity && index + len <= MainMenu.username.length; len++) {
+                        while (index + len + 1 <= MainMenu.username.length && MainMenu.username.charCodeAt(index + len) !== spaceCharCode && MainMenu.username.charCodeAt(index + len) !== tabCharCode) {
+                            len += 1;
+                        }
+
+                        // now we have the length of a word that ends with a space
+                        const currentWord = MainMenu.username.substring(index, index + len);
+                        if (ChatManager.extremeProfanityFilterSet[currentWord]) {
+                            const replacement = '*'.repeat(currentWord.length);
+                            MainMenu.username = MainMenu.username.substring(0, index) + replacement + MainMenu.username.substring(index + currentWord.length);
+                        }
+                    }
+                }
             }
         };
 

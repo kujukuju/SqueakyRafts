@@ -1,6 +1,12 @@
 class DeathScreen {
     // static TEXTURE = PIXI.Texture.from('assets/death-screen.png');
-    static FADED_TEXTURE = PIXI.Texture.from('assets/faded.png');
+    static FADED_TEXTURE = PIXI.Texture.from((function() {
+        if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
+            return 'assets/faded-clear.png';
+        } else {
+            return 'assets/faded.png';
+        }
+    })());
     static RESPAWN_TEXTURE = PIXI.Texture.from('assets/faded-respawn.png');
 
     // static sprite;

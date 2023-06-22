@@ -1,5 +1,5 @@
 class Connection {
-    static SERVER = 'localhost';
+    static SERVER = 'server.squeakyrafts.io';
 
     static socket;
     static retryTimeout;
@@ -19,7 +19,7 @@ class Connection {
             return;
         }
 
-        Connection.socket = new WebSocket('ws://' + Connection.SERVER + ':5050');
+        Connection.socket = new WebSocket('wss://' + Connection.SERVER + ':50505');
         Connection.socket.binaryType = 'arraybuffer';
         Connection.socket.addEventListener('open', (event) => {
             Connection.onOpen(event);

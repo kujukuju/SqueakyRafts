@@ -1110,6 +1110,7 @@ const PixelScan = (function() {
         }, true);
     
         window.addEventListener('mousedown', event => {
+            console.log(event);
             if (event.button === 0) {
                 Input.mouseDownLeft = Input.DOWN | Input.DELTA_DOWN;
             }

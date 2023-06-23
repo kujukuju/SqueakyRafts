@@ -1,4 +1,4 @@
-window.onload = () => {
+window.addEventListener('load', () => {
     Renderer.initialize();
     Environment.initialize();
     Connection.initialize();
@@ -43,7 +43,7 @@ window.onload = () => {
             }
         }, 60 * 1000);
     }
-};
+});
 
 let warnedRestart = false;
 

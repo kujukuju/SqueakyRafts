@@ -82,6 +82,12 @@ class DeathScreen {
                         };
 
                         window.CrazyGames.SDK.ad.requestAd("midgame", callbacks);
+                    } else {
+                        Logic.hasSpawned = false;
+                        EntityInformation._clientStringID = null;
+                        EntityInformation._clientID = null;
+                        DeathScreen.hideFaded();
+                        MainMenu.mainMenuVisible = true;
                     }
                 }
             }

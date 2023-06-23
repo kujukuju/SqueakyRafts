@@ -58,7 +58,7 @@ class DeathScreen {
                 }
             }
             
-            console.log('respawn visible');
+            console.log('respawn visible', Input.mouseDownLeft, Input.mousePosition.x, Input.mousePosition.y);
 
             if (clicked) {
                 console.log('clicked');

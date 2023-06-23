@@ -21,7 +21,7 @@ class MainMenu {
         MainMenu.musicElement = document.getElementById('music-hover');
         MainMenu.twitchStreamElement = document.getElementById('twitch-embed');
         MainMenu.steamElement = document.getElementById('steam');
-        MainMenu.aBottomLargeElement = document.getElementById('squeakyrafts-io_970x90');
+        MainMenu.aBottomLargeElement = document.getElementById('squeakyrafts-io_728x90');
         MainMenu.aBottomSmallElement = document.getElementById('squeakyrafts-io_320x100');
 
         MainMenu.linksElement = document.getElementById('links');
@@ -42,10 +42,6 @@ class MainMenu {
             }
         };
 
-        if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
-            MainMenu.linksElement.classList.add('foreverClosed');
-        }
-
         const voiceChatElement = document.getElementById('voice-chat-hover');
         voiceChatElement.onclick = () => {
             MainMenu.voiceChatEnabled = !MainMenu.voiceChatEnabled;
@@ -59,11 +55,6 @@ class MainMenu {
                 voiceChatElement.classList.remove('enabled');
             }
         };
-
-        if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
-            document.getElementById('voice-chat-normal').classList.add('foreverClosed');
-            voiceChatElement.classList.add('foreverClosed');
-        }
 
         const playElement = document.getElementById('play-hover');
         playElement.onclick = () => {
@@ -142,6 +133,7 @@ class MainMenu {
         });
 
         MainMenu.resize();
+        MainMenu.refreshContent();
     }
 
     static update() {
@@ -208,18 +200,35 @@ class MainMenu {
 
     static refreshContent() {
         if (!MainMenu.aBottomLargeElement.classList.contains('wrongsize')) {
-            if (window.aiptag && window.aiptag.cmd && window.aiptag.cmd.display) {
-                window.aiptag.cmd.display.push(() => {
-                    window.aipDisplayTag.display('squeakyrafts-io_970x90');
+            if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
+                window.CrazyGames.SDK.banner.requestBanner({
+                    id: 'squeakyrafts-io_728x90',
+                    width: 728,
+                    height: 90,
                 });
+            } else {
+                if (window.aiptag && window.aiptag.cmd && window.aiptag.cmd.display) {
+                    window.aiptag.cmd.display.push(() => {
+                        window.aipDisplayTag.display('squeakyrafts-io_728x90');
+                    });
+                }
             }
         }
 
         if (!MainMenu.aBottomSmallElement.classList.contains('wrongsize')) {
-            if (window.aiptag && window.aiptag.cmd && window.aiptag.cmd.display) {
-                window.aiptag.cmd.display.push(() => {
-                    window.aipDisplayTag.display('squeakyrafts-io_320x100');
+            if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
+                console.log('requested small');
+                window.CrazyGames.SDK.banner.requestBanner({
+                    id: 'squeakyrafts-io_320x100',
+                    width: 320,
+                    height: 100,
                 });
+            } else {
+                if (window.aiptag && window.aiptag.cmd && window.aiptag.cmd.display) {
+                    window.aiptag.cmd.display.push(() => {
+                        window.aipDisplayTag.display('squeakyrafts-io_320x100');
+                    });
+                }
             }
         }
     }

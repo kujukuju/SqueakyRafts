@@ -121,11 +121,15 @@ body.dark .chatContainer .chat .chatBottom .inputContainer .input {
 }
 
 .chatContainer .chat .chatBottom .inputContainer .input:focus {
-    background-color: rgba(239, 239, 239, 0.8);
+    background-color: rgba(239, 239, 239, 1.0);
 }
 
 body.dark .chatContainer .chat .chatBottom .inputContainer .input:focus {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 1.0);
+}
+
+.chatContainer .chat.hover .chatBottom .inputContainer .input {
+    background-color: rgba(239, 239, 239, 1.0);
 }
 
 .chatContainer .chat .chatContainer {

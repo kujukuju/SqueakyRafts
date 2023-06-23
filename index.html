@@ -99,6 +99,7 @@
         <script src="src/WoodObject.js"></script>
 
         <script src="https://embed.twitch.tv/embed/v1.js"></script>
+        <script src="https://sdk.crazygames.com/crazygames-sdk-v2.js"></script>
     </head>
     <body>
         <div id="canvas-container"></div>
@@ -152,12 +153,17 @@
                             Press to drop things!
                         </div>
                     </div>
-                    <div class="instruction">
+                    <div class="instruction" id="voice-instructions">
                         <div class="instructionTitle">T</div>
                         <div class="instructionDescription">
                             Push to talk for voice chat!
                         </div>
                     </div>
+                    <script>
+                        if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
+                            document.getElementById('voice-instructions').classList.add('foreverClosed');
+                        }
+                    </script>
                 </div>
                 <div class="options">
                     <div class="option">
@@ -165,6 +171,12 @@
                             <img src="/assets/mainmenu-voice-chat.png" id="voice-chat-normal" draggable="false" />
                             <img src="/assets/mainmenu-voice-chat-hover.png" class="hoverImage voice" id="voice-chat-hover" draggable="false" />
                         </div>
+                        <script>
+                            if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
+                                document.getElementById('voice-chat-normal').classList.add('foreverClosed');
+                                document.getElementById('voice-chat-hover').classList.add('foreverClosed');
+                            }
+                        </script>
                     </div>
                     <div class="option empty">
                     </div>
@@ -202,7 +214,12 @@
                 <div class="linksClose" id="links-close">Close</div>
             </div>
         </div>
-        <div class="squeakyRaftsBottomLarge wrongsize" id="squeakyrafts-io_970x90"></div>
+        <script>
+            if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
+                document.getElementById('links').classList.add('foreverClosed');
+            }
+        </script>
+        <div class="squeakyRaftsBottomLarge wrongsize" id="squeakyrafts-io_728x90"></div>
         <div class="squeakyRaftsBottomSmall wrongsize" id="squeakyrafts-io_320x100"></div>
     </body>
 </html>

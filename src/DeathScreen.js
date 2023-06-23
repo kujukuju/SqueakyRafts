@@ -61,11 +61,28 @@ class DeathScreen {
             if (clicked) {
                 if (EntityInformation.getClientEntity()) {
                     EntityInformation.getClientEntity().destroy();
-                    Logic.hasSpawned = false;
-                    EntityInformation._clientStringID = null;
-                    EntityInformation._clientID = null;
-                    DeathScreen.hideFaded();
-                    MainMenu.mainMenuVisible = true;
+                    if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
+                        const doneCallback = () => {
+                            Logic.hasSpawned = false;
+                            EntityInformation._clientStringID = null;
+                            EntityInformation._clientID = null;
+                            DeathScreen.hideFaded();
+                            MainMenu.mainMenuVisible = true;
+                        };
+                        const callbacks = {
+                            adFinished: () => {
+                                doneCallback();
+                            },
+                            adError: (error) => {
+                                doneCallback();
+                            },
+                            adStarted: () => {
+
+                            },
+                        };
+
+                        window.CrazyGames.SDK.ad.requestAd("midgame", callbacks);
+                    }
                 }
             }
         }

@@ -302,7 +302,7 @@ img {
 
 .links {
     position: absolute;
-    bottom: 2vmin;
+    bottom: calc(1vmin + 100px);
     left: 50%;
 
     transform: translateX(-50%);
@@ -358,10 +358,12 @@ img {
 
 .squeakyRaftsBottomLarge {
     position: absolute;
-    top: 100%;
+    top: calc(100% - 90px);
     left: 50%;
 
-    transform: translateX(-50%) translateY(-100%);
+    transform: translateX(-50%);
+
+    z-index: 100000;
 
     /* width: 970px;
     height: 90px;
@@ -376,10 +378,12 @@ img {
 
 .squeakyRaftsBottomSmall {
     position: absolute;
-    top: 100%;
+    top: calc(100% - 100px);
     left: 50%;
 
-    transform: translateX(-50%) translateY(-100%);
+    transform: translateX(-50%);
+
+    z-index: 100000;
 
     /* width: 320px;
     height: 100px;

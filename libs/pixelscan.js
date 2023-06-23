@@ -1109,8 +1109,30 @@ const PixelScan = (function() {
             return true;
         }, true);
     
-        window.addEventListener('mousedown', event => {
-            console.log(event);
+        // window.addEventListener('mousedown', event => {
+        //     console.log(event);
+        //     if (event.button === 0) {
+        //         Input.mouseDownLeft = Input.DOWN | Input.DELTA_DOWN;
+        //     }
+        //     if (event.button === 2) {
+        //         Input.mouseDownRight = Input.DOWN | Input.DELTA_DOWN;
+        //     }
+    
+        //     return true;
+        // });
+    
+        // window.addEventListener('mouseup', event => {
+        //     if (event.button === 0) {
+        //         Input.mouseDownLeft = Input.NONE;
+        //     }
+        //     if (event.button === 2) {
+        //         Input.mouseDownRight = Input.NONE;
+        //     }
+    
+        //     return true;
+        // });
+    
+        window.addEventListener('pointerdown', event => {
             if (event.button === 0) {
                 Input.mouseDownLeft = Input.DOWN | Input.DELTA_DOWN;
             }
@@ -1119,9 +1141,9 @@ const PixelScan = (function() {
             }
     
             return true;
-        });
+        }, true);
     
-        window.addEventListener('mouseup', event => {
+        window.addEventListener('pointerup', event => {
             if (event.button === 0) {
                 Input.mouseDownLeft = Input.NONE;
             }
@@ -1130,7 +1152,7 @@ const PixelScan = (function() {
             }
     
             return true;
-        });
+        }, true);
     
         window.addEventListener('mousemove', event => {
             Input.mousePosition.x = event.clientX;

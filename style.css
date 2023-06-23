@@ -358,7 +358,7 @@ img {
 
 .squeakyRaftsBottomLarge {
     position: absolute;
-    top: calc(100% - 90px);
+    bottom: 0;
     left: 50%;
 
     transform: translateX(-50%);
@@ -378,7 +378,7 @@ img {
 
 .squeakyRaftsBottomSmall {
     position: absolute;
-    top: calc(100% - 100px);
+    bottom: 0;
     left: 50%;
 
     transform: translateX(-50%);

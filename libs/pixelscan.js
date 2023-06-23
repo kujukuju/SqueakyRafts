@@ -1119,7 +1119,7 @@ const PixelScan = (function() {
             }
     
             return true;
-        }, true);
+        });
     
         window.addEventListener('mouseup', event => {
             if (event.button === 0) {
@@ -1130,7 +1130,7 @@ const PixelScan = (function() {
             }
     
             return true;
-        }, true);
+        });
     
         window.addEventListener('mousemove', event => {
             Input.mousePosition.x = event.clientX;

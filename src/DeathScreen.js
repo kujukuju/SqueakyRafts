@@ -66,23 +66,14 @@ class DeathScreen {
                     EntityInformation._clientID = null;
                     DeathScreen.hideFaded();
                     MainMenu.mainMenuVisible = true;
-                    
-                    if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
-                        const doneCallback = () => {
-                            NSWA.setVolume(1);
 
-                            Logic.hasSpawned = false;
-                            EntityInformation._clientStringID = null;
-                            EntityInformation._clientID = null;
-                            DeathScreen.hideFaded();
-                            MainMenu.mainMenuVisible = true;
-                        };
+                    if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
                         const callbacks = {
                             adFinished: () => {
-                                doneCallback();
+                                NSWA.setVolume(1);
                             },
                             adError: (error) => {
-                                doneCallback();
+                                NSWA.setVolume(1);
                             },
                             adStarted: () => {
                                 NSWA.setVolume(0);

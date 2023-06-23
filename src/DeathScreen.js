@@ -57,6 +57,8 @@ class DeathScreen {
                     clicked = clicked || aabb.contains(touch.x, touch.y);
                 }
             }
+            
+            console.log('respawn visible');
 
             if (clicked) {
                 console.log('clicked');

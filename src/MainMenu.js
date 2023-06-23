@@ -155,6 +155,10 @@ class MainMenu {
 
                 MainMenu.refreshContent();
                 MainMenu.resize();
+
+                if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
+                    window.CrazyGames.SDK.game.gameplayStop();
+                }
             }
         } else {
             if (MainMenu.mainMenuElement.style.display !== 'none') {
@@ -167,6 +171,10 @@ class MainMenu {
 
                 MainMenu.aBottomLargeElement.classList.add('playing');
                 MainMenu.aBottomSmallElement.classList.add('wrongsize');
+
+                if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
+                    window.CrazyGames.SDK.game.gameplayStart();
+                }
             }
         }
 

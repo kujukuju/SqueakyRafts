@@ -223,7 +223,7 @@ img {
     background-size: 100% 100%;
     image-rendering: pixelated;
 
-    z-index: -10;
+    z-index: 0;
 }
 
 .steam.vertical {

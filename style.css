@@ -135,7 +135,7 @@ img {
 
 .mainmenuHolder .mainmenu .options .option .wrap img {
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 
 .mainmenuHolder .mainMenu .musicContainer {

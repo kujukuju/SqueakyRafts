@@ -66,22 +66,6 @@ class DeathScreen {
                     EntityInformation._clientID = null;
                     DeathScreen.hideFaded();
                     MainMenu.mainMenuVisible = true;
-
-                    if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
-                        const callbacks = {
-                            adFinished: () => {
-                                NSWA.setVolume(1);
-                            },
-                            adError: (error) => {
-                                NSWA.setVolume(1);
-                            },
-                            adStarted: () => {
-                                NSWA.setVolume(0);
-                            },
-                        };
-
-                        window.CrazyGames.SDK.ad.requestAd("midgame", callbacks);
-                    }
                 }
             }
         }

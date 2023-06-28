@@ -175,6 +175,22 @@ class MainMenu {
                 if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
                     window.CrazyGames.SDK.game.gameplayStart();
                 }
+                
+                if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
+                    const callbacks = {
+                        adFinished: () => {
+                            NSWA.setVolume(1);
+                        },
+                        adError: (error) => {
+                            NSWA.setVolume(1);
+                        },
+                        adStarted: () => {
+                            NSWA.setVolume(0);
+                        },
+                    };
+
+                    window.CrazyGames.SDK.ad.requestAd("midgame", callbacks);
+                }
             }
         }
 
@@ -207,6 +223,7 @@ class MainMenu {
     }
 
     static refreshContent() {
+        return;
         if (!MainMenu.aBottomLargeElement.classList.contains('wrongsize')) {
             if (IFRAME_ORIGIN && IFRAME_ORIGIN.includes('crazygames')) {
                 window.CrazyGames.SDK.banner.requestBanner({

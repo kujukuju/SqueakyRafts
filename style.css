@@ -59,6 +59,7 @@ img {
     margin: 0;
     line-height: 8vmin;
     text-align: center;
+    white-space: nowrap;
 }
 
 .mainmenuHolder .mainmenu .inputHolder {

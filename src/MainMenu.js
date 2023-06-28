@@ -79,7 +79,7 @@ class MainMenu {
                         }
 
                         // now we have the length of a word that ends with a space
-                        const currentWord = MainMenu.username.substring(index, index + len);
+                        const currentWord = MainMenu.username.substring(index, index + len).toLowerCase();
                         if (ChatManager.extremeProfanityFilterSet[currentWord]) {
                             const replacement = '*'.repeat(currentWord.length);
                             MainMenu.username = MainMenu.username.substring(0, index) + replacement + MainMenu.username.substring(index + currentWord.length);

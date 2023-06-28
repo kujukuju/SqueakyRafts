@@ -2104,7 +2104,7 @@ ChatManager.receivedMessage = function(entityID, message) {
                 }
 
                 // now we have the length of a word that ends with a space
-                const currentWord = message.substring(index, index + len);
+                const currentWord = message.toLowerCase().substring(index, index + len);
                 if (ChatManager.extremeProfanityFilterSet[currentWord]) {
                     const replacement = '*'.repeat(currentWord.length);
                     message = message.substring(0, index) + replacement + message.substring(index + currentWord.length);

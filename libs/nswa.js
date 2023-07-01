@@ -1236,17 +1236,25 @@ const NSWA = {
     SourceBase,
     Source,
     setListenerOrientation: function(forwardX, forwardY, forwardZ, upX, upY, upZ) {
-        NSWA.context.listener.forwardX.linearRampToValueAtTime(forwardX, NSWA.context.currentTime + 0.05);
-        NSWA.context.listener.forwardY.linearRampToValueAtTime(forwardY, NSWA.context.currentTime + 0.05);
-        NSWA.context.listener.forwardZ.linearRampToValueAtTime(forwardZ, NSWA.context.currentTime + 0.05);
-        NSWA.context.listener.upX.linearRampToValueAtTime(upX, NSWA.context.currentTime + 0.05);
-        NSWA.context.listener.upY.linearRampToValueAtTime(upY, NSWA.context.currentTime + 0.05);
-        NSWA.context.listener.upZ.linearRampToValueAtTime(upZ, NSWA.context.currentTime + 0.05);
+        if (NSWA.context.listener.forwardX !== undefined) {
+            NSWA.context.listener.forwardX.linearRampToValueAtTime(forwardX, NSWA.context.currentTime + 0.05);
+            NSWA.context.listener.forwardY.linearRampToValueAtTime(forwardY, NSWA.context.currentTime + 0.05);
+            NSWA.context.listener.forwardZ.linearRampToValueAtTime(forwardZ, NSWA.context.currentTime + 0.05);
+            NSWA.context.listener.upX.linearRampToValueAtTime(upX, NSWA.context.currentTime + 0.05);
+            NSWA.context.listener.upY.linearRampToValueAtTime(upY, NSWA.context.currentTime + 0.05);
+            NSWA.context.listener.upZ.linearRampToValueAtTime(upZ, NSWA.context.currentTime + 0.05);
+        } else {
+            NSWA.context.listener.setOrientation(forwardX, forwardY, forwardZ, upX, upY, upZ);
+        }
     },
     setListenerPosition: function(x, y, z) {
-        NSWA.context.listener.positionX.linearRampToValueAtTime(x, NSWA.context.currentTime + 0.05);
-        NSWA.context.listener.positionY.linearRampToValueAtTime(y, NSWA.context.currentTime + 0.05);
-        NSWA.context.listener.positionZ.linearRampToValueAtTime(z, NSWA.context.currentTime + 0.05);
+        if (NSWA.context.listener.positionX !== undefined) {
+            NSWA.context.listener.positionX.linearRampToValueAtTime(x, NSWA.context.currentTime + 0.05);
+            NSWA.context.listener.positionY.linearRampToValueAtTime(y, NSWA.context.currentTime + 0.05);
+            NSWA.context.listener.positionZ.linearRampToValueAtTime(z, NSWA.context.currentTime + 0.05);
+        } else {
+            NSWA.context.listener.setPosition(x, y, z);
+        }
     },
     setVolume(volume) {
         NSWA.destination.gain.setValueAtTime(volume, NSWA.context.currentTime);

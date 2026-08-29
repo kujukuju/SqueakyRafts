@@ -18,64 +18,47 @@ class BetterWaterShader extends PIXI.Filter {
     uniform float uSpeed;
     uniform vec3 uBackgroundColor;
 
-    float avg(vec4 color) {
+    float luminance(vec3 color) {
         return (color.r + color.g + color.b) / 3.0;
     }
 
     void main(void) {
         float time = uTime / 60.0;
-     
         vec2 uv = vec2(vTextureCoord.x, 1.0 - vTextureCoord.y) + uOffset / inputPixel.xy;
         vec2 scaledUv = uv * uScale * inputPixel.xy / 1200.0;
-    
-        vec4 water1 = vec4(texture2D(uNoiseSampler, scaledUv + time * uSpeed * 0.02 - 0.1 + vec2(0.0, 0.5)).rgb / 3.0, 1.0);
-        vec4 water2 = vec4(texture2D(uNoiseSampler, scaledUv + time * uSpeed * -0.02 + 0.1).rgb / 3.0, 1.0);
-        
-        vec4 highlights1 = vec4(texture2D(uHighlights, scaledUv + time * uSpeed / vec2(-10, 100) + vec2(0.0, 0.5)).rgb / 3.0, 1.0);
-        vec4 highlights2 = vec4(texture2D(uHighlights, scaledUv + time * uSpeed / vec2(10, 100)).rgb / 3.0, 1.0);
-        
+
+        float water1 = luminance(texture2D(uNoiseSampler, scaledUv + time * uSpeed * 0.02 - 0.1 + vec2(0.0, 0.5)).rgb) / 3.0;
+        float water2 = luminance(texture2D(uNoiseSampler, scaledUv - time * uSpeed * 0.02 + 0.1).rgb) / 3.0;
+        float highlights = luminance(texture2D(uHighlights, scaledUv + time * uSpeed / vec2(-10.0, 100.0) + vec2(0.0, 0.5)).rgb) / 4.5;
+
         vec4 normalBackground = texture2D(uSampler, vTextureCoord);
-        vec4 background = texture2D(uSampler, vTextureCoord + avg(water1) * 0.05 * uStrength - 0.005 * uStrength);
-        
-        water1.rgb = vec3(avg(water1));
-        water2.rgb = vec3(avg(water2));
-        
-        highlights1.rgb = vec3(avg(highlights1) / 1.5);
-        highlights2.rgb = vec3(avg(highlights2) / 1.5);
-        
+        vec4 background = texture2D(uSampler, vTextureCoord + water1 * 0.05 * uStrength - 0.005 * uStrength);
+
         float alpha = uOpacity;
-        
-        if (avg(water1 + water2) > 0.3) {
+        float water = water1 + water2;
+        if (water > 0.3) {
             alpha = 0.0;
         }
-        
-        if (avg(water1 + water2 + highlights1 + highlights2) > 0.85) {
+        if (water + highlights * 2.0 > 0.85) {
             alpha = 5.0 * uOpacity;
         }
 
-        // correct pma
-        float waterTotal = 1.0;
-        // float oldNormalBackgroundAlpha = normalBackground.a;
-        if (normalBackground.a != 0.0) {
-            waterTotal = normalBackground.a;
-            normalBackground /= normalBackground.a;
+        float waterTotal = normalBackground.a;
+        if (normalBackground.a > 0.0) {
+            normalBackground.rgb /= normalBackground.a;
+            normalBackground.a = 1.0;
         } else {
             normalBackground = vec4(uBackgroundColor, 1.0);
         }
-        if (background.a != 0.0) {
-            background /= background.a;
+        if (background.a > 0.0) {
+            background.rgb /= background.a;
+            background.a = 1.0;
         } else {
             background = vec4(uBackgroundColor, 1.0);
         }
 
-        if (normalBackground.a == 0.0) {
-            background = vec4(uBackgroundColor, 1.0);
-        }
-
-        waterTotal = pow(waterTotal, 3.0);
-
-        // vec4 color = min((water1 + water2) * alpha + background * oldNormalBackgroundAlpha + vec4(uBackgroundColor, 1.0) * (1.0 - oldNormalBackgroundAlpha), 1.0);
-        vec4 color = min((water1 + water2) * alpha + background, 1.0);
+        waterTotal = waterTotal * waterTotal * waterTotal;
+        vec4 color = min(vec4(vec3(water * alpha), 0.0) + background, 1.0);
         gl_FragColor = color * waterTotal + normalBackground * (1.0 - waterTotal);
     }
     `;
@@ -108,9 +91,9 @@ class BetterWaterShader extends PIXI.Filter {
         return new Vec2(this.uniforms.uOffset[0], this.uniforms.uOffset[1]);
     }
 
-    setOffset(offset) {
-        this.uniforms.uOffset[0] = offset.x;
-        this.uniforms.uOffset[1] = offset.y;
+    setOffset(x, y) {
+        this.uniforms.uOffset[0] = x;
+        this.uniforms.uOffset[1] = y;
     }
 
     getOpacity() {

@@ -23,7 +23,7 @@ class Renderer {
 
     static initialize() {
         // can I not create this immediately?
-        Renderer.application = new PIXI.Application({width: window.innerWidth, height: window.innerHeight, autoStart: false, antialias: true});
+        Renderer.application = new PIXI.Application({width: window.innerWidth, height: window.innerHeight, autoStart: false, antialias: false});
         document.getElementById('canvas-container').appendChild(Renderer.application.view);
 
         Renderer.application.stage.addChild(Renderer.container);

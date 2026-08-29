@@ -879,8 +879,11 @@ s
             }
 
             Environment.surfaceColorShader.getColor()[3] = underwaterAlpha;
-
             Environment.interactableColorShader.getColor()[3] = underwaterAlpha;
+
+            const colorFiltersEnabled = underwaterAlpha > 0;
+            Environment.surfaceColorShader.enabled = colorFiltersEnabled;
+            Environment.interactableColorShader.enabled = colorFiltersEnabled;
 
             const r = Environment.defaultBackgroundColor[0] + (Environment.defaultUnderwaterColor[0] - Environment.defaultBackgroundColor[0]) * underwaterAlpha;
             const g = Environment.defaultBackgroundColor[1] + (Environment.defaultUnderwaterColor[1] - Environment.defaultBackgroundColor[1]) * underwaterAlpha;

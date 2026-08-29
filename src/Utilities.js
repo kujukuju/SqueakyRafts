@@ -23,6 +23,10 @@ const cullSprite = (sprite) => {
     overlap = overlap && minY <= Camera.aabb.y + Camera.aabb.height;
 
     sprite.visible = overlap;
+    if (overlap && sprite.lazyTexturePath) {
+        sprite.texture = PIXI.Texture.from(sprite.lazyTexturePath);
+        sprite.lazyTexturePath = null;
+    }
 };
 
 const getPolygonAroundPoint = (point, halfWidth, halfHeight, vertices) => {

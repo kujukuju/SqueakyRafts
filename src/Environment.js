@@ -1,34 +1,4 @@
 class Environment {
-    // static ISLAND_STARTER = PIXI.Texture.from('assets/starterisland.png');
-    static ISLAND_STARTER_UNDERWATER = PIXI.Texture.from('assets/starterisland-water.png');
-
-    // static SMALL_ISLAND1 = PIXI.Texture.from('assets/smallisland1.png');
-    static SMALL_ISLAND1_UNDERWATER = PIXI.Texture.from('assets/smallisland1water.png');
-
-    // static SMALL_ISLAND2 = PIXI.Texture.from('assets/smallisland2.png');
-    static SMALL_ISLAND2_UNDERWATER = PIXI.Texture.from('assets/smallisland2water.png');
-
-    // static SMALL_ISLAND3 = PIXI.Texture.from('assets/small-island3.png');
-    static SMALL_ISLAND3_UNDERWATER = PIXI.Texture.from('assets/small-island3water.png');
-
-    // static ISLAND2 = PIXI.Texture.from('assets/island2.png');
-    static ISLAND2_UNDERWATER = PIXI.Texture.from('assets/island2water.png');
-
-    // static ISLAND3 = PIXI.Texture.from('assets/island3.png');
-    static ISLAND3_UNDERWATER = PIXI.Texture.from('assets/island3-water.png');
-
-    // static ISLAND4 = PIXI.Texture.from('assets/island4.png');
-    static ISLAND4_UNDERWATER = PIXI.Texture.from('assets/island4water.png');
-
-    // static ISLAND5 = PIXI.Texture.from('assets/island5.png');
-    static ISLAND5_UNDERWATER = PIXI.Texture.from('assets/island5water.png');
-
-    // static END_ISLAND_TOP = PIXI.Texture.from('assets/endisland-top.png');
-    static END_ISLAND_TOP_UNDERWATER = PIXI.Texture.from('assets/endisland-top-water.png');
-
-    // static END_ISLAND_BOTTOM = PIXI.Texture.from('assets/endisland-bottom1.png');
-    static END_ISLAND_BOTTOM_UNDERWATER = PIXI.Texture.from('assets/endisland-bottom-water.png');
-
     static surfaceColorShader = new SurfaceColorShader();
     static interactableColorShader = new SurfaceColorShader();
 
@@ -46,11 +16,15 @@ class Environment {
 
         Environment.surfaceColorShader.setColor(Environment.defaultUnderwaterColor[0], Environment.defaultUnderwaterColor[1], Environment.defaultUnderwaterColor[2], 0);
         Environment.interactableColorShader.setColor(0, 0, 0, 0);
+        Environment.surfaceColorShader.enabled = false;
+        Environment.interactableColorShader.enabled = false;
 
         Renderer.underwater.filters = [Environment.waterFilter];
         Renderer.underwater.filterArea = new PIXI.Rectangle(0, 0, window.innerWidth, window.innerHeight);
 
-        const islandStarterWater = new PIXI.Sprite(Environment.ISLAND_STARTER_UNDERWATER);
+        const islandStarterWater = new PIXI.Sprite(PIXI.Texture.EMPTY);
+        islandStarterWater.width = 2500;
+        islandStarterWater.height = 2500;
         islandStarterWater.filters = [Environment.surfaceColorShader];
         islandStarterWater.anchor.x = 0.5;
         islandStarterWater.anchor.y = 0.5;
@@ -58,7 +32,7 @@ class Environment {
         islandStarterWater.position.y = 452 / 0.04;
         islandStarterWater.visile = false;
         Renderer.underwaterBackground.addChild(islandStarterWater);
-        CullOptimizer.addPermanentSpriteAfterSetup(islandStarterWater);
+        CullOptimizer.addPermanentSpriteAfterSetup(islandStarterWater, 'assets/starterisland-water.png');
         IslandManager.addIsland([[2568,10648],[2365,10818],[2248,10895],[2107,10858],[1991,10898],[1951,10971],[2005,11120],[2103,11182],[2100,11385],[2063,11563],[2121,11621],[2281,11578],[2408,11516],[2637,11472],[2841,11447],[2917,11454],[3022,11454],[3135,11400],[3193,11349],[3316,11301],[3458,11192],[3578,11000],[3578,10786],[3553,10600],[3502,10473],[3364,10390],[3164,10411],[3077,10517],[2964,10557],[2833,10564],[2659,10579]]);
         IslandManager.addIsland([[2198,12050],[2092,12021],[2030,12028],[2023,12108],[2100,12181],[2179,12199],[2321,12221],[2456,12224],[2525,12235],[2612,12235],[2681,12224],[2819,12235],[2939,12231],[3073,12217],[3168,12181],[3215,12115],[3189,12042],[3153,12013],[2990,12024],[2793,12006],[2634,11988],[2499,11999],[2397,12046],[2328,12064]]);
         IslandManager.addIsland([[3578,11708],[3542,11763],[3553,11850],[3618,11897],[3712,11883],[3760,11814],[3774,11741],[3745,11676],[3651,11672]]);
@@ -67,7 +41,9 @@ class Environment {
         BoulderManager.addBoulderList([[3161,10530],[3662,11806],[2648,11097],[3062,11068]]);
         BoulderManager.addBoulderList([[2480,11007],[2688,10858],[3023,10734],[3217,10933],[2662,11204],[3612,11753],[2764,12120],[2393,12143],[3052,12124],[2896,12173]]);
 
-        const smallIsland1Water = new PIXI.Sprite(Environment.SMALL_ISLAND1_UNDERWATER);
+        const smallIsland1Water = new PIXI.Sprite(PIXI.Texture.EMPTY);
+        smallIsland1Water.width = 2000;
+        smallIsland1Water.height = 2000;
         smallIsland1Water.filters = [Environment.surfaceColorShader];
         smallIsland1Water.anchor.x = 0.5;
         smallIsland1Water.anchor.y = 0.5;
@@ -75,14 +51,16 @@ class Environment {
         smallIsland1Water.position.y = 203 / 0.04;
         smallIsland1Water.visile = false;
         Renderer.underwaterBackground.addChild(smallIsland1Water);
-        CullOptimizer.addPermanentSpriteAfterSetup(smallIsland1Water);
+        CullOptimizer.addPermanentSpriteAfterSetup(smallIsland1Water, 'assets/smallisland1water.png');
         IslandManager.addIsland([[22828,4684],[22844,4880],[22871,5049],[22915,5185],[22899,5327],[22866,5496],[22861,5599],[22931,5659],[23100,5654],[23329,5621],[23553,5616],[23765,5567],[23907,5490],[23988,5398],[23999,5245],[23956,5076],[23950,4902],[23929,4760],[23836,4651],[23645,4635],[23493,4619],[23345,4564],[23177,4510],[22980,4553],[22871,4608]]);
         TreeManager.addTreeList([[23589,4959],[23204,4977],[23175,5293]]);
         TreeManager.addTreeList([[23094,4706],[23362,4734],[23145,4842],[23414,4846],[23654,4783],[23738,4981],[23387,4986],[23731,5214],[23423,5231],[23154,5148],[23370,5358],[23654,5358],[23106,5415],[22994,5513],[22982,4828]]);
         BoulderManager.addBoulderList([[23789,4883],[23008,5101],[23088,5061]]);
         BoulderManager.addBoulderList([[23175,4674],[22896,4675],[23023,4976],[22987,5303],[23302,5546],[23259,5249],[23579,5107],[23573,5455],[23768,5422],[23790,5303],[23712,4840]]);
 
-        const smallIsland2Water = new PIXI.Sprite(Environment.SMALL_ISLAND2_UNDERWATER);
+        const smallIsland2Water = new PIXI.Sprite(PIXI.Texture.EMPTY);
+        smallIsland2Water.width = 1500;
+        smallIsland2Water.height = 1500;
         smallIsland2Water.filters = [Environment.surfaceColorShader];
         smallIsland2Water.anchor.x = 0.5;
         smallIsland2Water.anchor.y = 0.5;
@@ -90,14 +68,16 @@ class Environment {
         smallIsland2Water.position.y = 274 / 0.04;
         smallIsland2Water.visile = false;
         Renderer.underwaterBackground.addChild(smallIsland2Water);
-        CullOptimizer.addPermanentSpriteAfterSetup(smallIsland2Water);
+        CullOptimizer.addPermanentSpriteAfterSetup(smallIsland2Water, 'assets/smallisland2water.png');
         IslandManager.addIsland([[43189,6408],[43193,6456],[43269,6514],[43357,6586],[43400,6685],[43389,6804],[43353,6910],[43331,6975],[43342,7019],[43415,7033],[43549,7030],[43644,7095],[43687,7179],[43723,7269],[43771,7320],[43894,7324],[43960,7266],[43981,7186],[43934,7095],[43876,7022],[43836,6899],[43836,6815],[43858,6764],[43829,6721],[43756,6703],[43720,6634],[43720,6554],[43796,6481],[43854,6427],[43876,6369],[43832,6299],[43647,6285],[43357,6318],[43222,6354]]);
         TreeManager.addTreeList([[43419,6470],[43630,6452],[43543,6728],[43641,6939],[43826,7095]]);
         TreeManager.addTreeList([[43313,6401],[43546,6395],[43457,6529],[43606,6574],[43684,6750],[43500,6831],[43734,6906],[43693,7007],[43874,7200]]);
         BoulderManager.addBoulderList([[43345,6514],[43650,6623],[43704,7085],[43773,7136],[43363,6994]]);
         BoulderManager.addBoulderList([[43274,6447],[43479,6360],[43729,6497],[43450,6634],[43552,6979],[43764,6799]]);
 
-        const smallIsland3Water = new PIXI.Sprite(Environment.SMALL_ISLAND3_UNDERWATER);
+        const smallIsland3Water = new PIXI.Sprite(PIXI.Texture.EMPTY);
+        smallIsland3Water.width = 2000;
+        smallIsland3Water.height = 2000;
         smallIsland3Water.filters = [Environment.surfaceColorShader];
         smallIsland3Water.anchor.x = 0.5;
         smallIsland3Water.anchor.y = 0.5;
@@ -105,7 +85,7 @@ class Environment {
         smallIsland3Water.position.y = 688 / 0.04;
         smallIsland3Water.visile = false;
         Renderer.underwaterBackground.addChild(smallIsland3Water);
-        CullOptimizer.addPermanentSpriteAfterSetup(smallIsland3Water);
+        CullOptimizer.addPermanentSpriteAfterSetup(smallIsland3Water, 'assets/small-island3water.png');
         IslandManager.addIsland([[31800,16663],[31702,16601],[31585,16557],[31447,16557],[31378,16604],[31371,16633],[31458,16692],[31527,16739],[31567,16797],[31560,16866],[31495,16942],[31418,17048],[31429,17088],[31509,17095],[31622,17069],[31713,17040],[31789,17062],[31858,17124],[31952,17175],[32043,17204],[32090,17197],[32098,17131],[32076,17058],[32098,17004],[32167,16975],[32290,16920],[32363,16848],[32276,16811],[32210,16797],[32134,16750],[32101,16677],[32039,16601],[31930,16630],[31847,16673]]);
         IslandManager.addIsland([[31593,17563],[31455,17614],[31378,17698],[31400,17752],[31476,17770],[31567,17760],[31654,17749],[31767,17756],[31840,17774],[31938,17800],[32043,17825],[32119,17847],[32221,17861],[32301,17847],[32337,17800],[32334,17738],[32279,17676],[32127,17643],[31941,17614],[31745,17589],[31665,17571]]);
         TreeManager.addTreeList([[31646,16721],[31977,16776],[31981,16932],[31788,16950]]);
@@ -113,7 +93,9 @@ class Environment {
         BoulderManager.addBoulderList([[31588,17672],[31715,17650],[31766,17686],[32096,17752],[32187,17726],[31900,16967],[31686,16815],[31471,16669]]);
         BoulderManager.addBoulderList([[31973,16831],[31890,17694]]);
 
-        const island2water = new PIXI.Sprite(Environment.ISLAND2_UNDERWATER);
+        const island2water = new PIXI.Sprite(PIXI.Texture.EMPTY);
+        island2water.width = 3000;
+        island2water.height = 3000;
         island2water.filters = [Environment.surfaceColorShader];
         island2water.anchor.x = 0.5;
         island2water.anchor.y = 0.5;
@@ -121,14 +103,16 @@ class Environment {
         island2water.position.y = 325 / 0.04;
         island2water.visile = false;
         Renderer.underwaterBackground.addChild(island2water);
-        CullOptimizer.addPermanentSpriteAfterSetup(island2water);
+        CullOptimizer.addPermanentSpriteAfterSetup(island2water, 'assets/island2water.png');
         IslandManager.addIsland([[14237,7224],[14059,7293],[13895,7384],[13826,7446],[13833,7489],[13950,7493],[14160,7515],[14360,7562],[14564,7649],[14712,7769],[14789,7932],[14789,8118],[14738,8386],[14654,8583],[14509,8732],[14346,8844],[14189,8920],[14099,8989],[14088,9069],[14135,9098],[14320,9142],[14531,9149],[14923,9120],[15236,9033],[15508,8957],[15686,8786],[15766,8579],[15824,8336],[15835,8129],[15817,7929],[15748,7642],[15610,7453],[15410,7311],[15127,7202],[14894,7144],[14618,7111],[14346,7170]]);
         TreeManager.addTreeList([[14790,7537],[15091,7490],[15494,7911],[14997,7810],[14953,8416],[15469,8649],[14663,8874],[14641,7247]]);
         TreeManager.addTreeList([[14502,7343],[14747,7297],[14638,7410],[14873,7339],[14913,7642],[15042,7590],[15326,7491],[15436,7571],[15289,7665],[15493,7702],[15337,8094],[15045,8061],[15237,8200],[15470,8223],[15593,8375],[15330,8475],[15162,8421],[15064,8504],[14920,8607],[15195,8626],[15323,8720],[15418,8758],[15199,8814],[15134,8736],[14992,8908],[14839,8908],[14785,8763],[14744,8920],[14563,8929],[14594,8823],[14473,8909],[14395,8973]]);
         BoulderManager.addBoulderList([[13992,7396],[14159,7320],[14592,7483],[14958,7367],[15554,8105],[15427,8028],[14432,9035],[14675,9067],[14962,9035]]);
         BoulderManager.addBoulderList([[14391,7454],[14997,7466],[14818,7692],[15238,7781],[15069,7898],[15344,7936],[15768,8223],[15755,8424],[15657,8644],[15228,8490],[14907,8471],[14687,8694],[14844,9063],[15086,9018],[14972,8652],[14938,8826]]);
 
-        const island3water = new PIXI.Sprite(Environment.ISLAND3_UNDERWATER);
+        const island3water = new PIXI.Sprite(PIXI.Texture.EMPTY);
+        island3water.width = 4277;
+        island3water.height = 4325;
         island3water.filters = [Environment.surfaceColorShader];
         island3water.anchor.x = 0.5;
         island3water.anchor.y = 0.5;
@@ -136,7 +120,7 @@ class Environment {
         island3water.position.y = 588 / 0.04;
         island3water.visile = false;
         Renderer.underwaterBackground.addChild(island3water);
-        CullOptimizer.addPermanentSpriteAfterSetup(island3water);
+        CullOptimizer.addPermanentSpriteAfterSetup(island3water, 'assets/island3-water.png');
         IslandManager.addIsland([[26180,13905],[26017,13517],[25588,13201],[25072,13034],[24480,12983],[23993,13052],[23547,13212],[23289,13444],[23136,13822],[23089,14258],[23085,14694],[23180,15061],[23318,15271],[23630,15424],[23843,15566],[23976,15774],[24009,16079],[23994,16319],[24071,16341],[24136,16145],[24285,16079],[24372,16163],[24372,16413],[24427,16406],[24427,16137],[24510,16083],[24576,16156],[24590,16406],[24710,16410],[24699,16137],[24768,16094],[24830,16163],[24859,16381],[24939,16388],[24928,16130],[24997,16083],[25066,16126],[25102,16370],[25182,16359],[25168,16090],[25230,16047],[25299,16105],[25342,16323],[25429,16319],[25386,15752],[25506,15640],[25117,15411],[24953,15560],[24805,15531],[24721,15498],[24543,15549],[24394,15505],[24361,15349],[24459,15135],[24619,14884],[24772,14851],[24917,14986],[25164,14746],[24990,14503],[24968,14219],[25055,13889],[25237,13667],[25444,13551],[25684,13558],[25916,13664],[26127,13914]]);
         IslandManager.addIsland([[24870,14535],[24772,14681],[24957,15066],[25070,15407],[25023,15513],[24819,15698],[25004,15956],[25382,15709],[25662,15618],[25967,15342],[26131,14997],[26200,14735],[26229,14535],[26160,14528],[26011,14808],[25709,14895],[25328,14880],[25063,14695]]);
         TreeManager.addTreeList([[23834,13295],[24223,13182],[24575,13419],[25407,13281],[24913,13807],[24789,14280],[24397,14846],[23692,14777],[23416,14941],[23282,14076],[24219,15496],[24528,15900],[25160,15649],[25527,15413],[25207,15101],[25825,15031],[25211,13495],[24677,13462],[24488,13342],[24143,13281]]);
@@ -144,7 +128,9 @@ class Environment {
         BoulderManager.addBoulderList([[23750,14229],[23754,14054],[23943,13862],[24005,13764],[24328,13902],[24404,13913],[24219,14410],[24302,14418],[23975,13266],[24368,13262],[24600,13491],[24549,13201],[24749,13273],[24884,13317],[25029,13321],[23565,13473],[23445,13513],[23939,14766],[24008,14952],[23935,15133],[24030,15348],[24851,15802],[25007,15900],[25563,15206],[25665,15141],[24858,14578],[24346,15013],[25160,13611],[25312,15366],[24357,15722],[24241,15798],[23612,15093],[23401,15053],[23427,14588],[23362,14519],[23332,13913],[25708,13393],[25824,13560],[25923,13582],[25454,14941],[25272,14872]]);
         BoulderManager.addBoulderList([[25511,15126],[25503,15240],[24961,15735],[24877,15879],[24619,15799],[24125,15262],[23817,15184],[23609,14831],[23488,14407],[24424,14050],[24562,13919],[24428,13494],[24194,13504],[24855,13343],[24867,13194],[25123,13288],[25040,13420],[24670,13805]]);
 
-        const island4water = new PIXI.Sprite(Environment.ISLAND4_UNDERWATER);
+        const island4water = new PIXI.Sprite(PIXI.Texture.EMPTY);
+        island4water.width = 3000;
+        island4water.height = 5000;
         island4water.filters = [Environment.surfaceColorShader];
         island4water.anchor.x = 0.5;
         island4water.anchor.y = 0.5;
@@ -152,14 +138,16 @@ class Environment {
         island4water.position.y = 591 / 0.04;
         island4water.visile = false;
         Renderer.underwaterBackground.addChild(island4water);
-        CullOptimizer.addPermanentSpriteAfterSetup(island4water);
+        CullOptimizer.addPermanentSpriteAfterSetup(island4water, 'assets/island4water.png');
         IslandManager.addIsland([[7462,12704],[7303,12940],[7241,13318],[7339,13645],[7473,13982],[7499,14255],[7375,14571],[7281,14898],[7283,15264],[7352,15653],[7457,15998],[7504,16274],[7410,16568],[7428,16721],[7537,16783],[8017,16837],[8598,16881],[9027,16855],[9205,16717],[9299,16561],[9248,16365],[9088,16191],[8776,16074],[8420,15940],[8256,15747],[8227,15518],[8253,15213],[8362,14963],[8540,14814],[8903,14607],[9077,14469],[9226,14203],[9263,14007],[9190,13833],[9016,13749],[8609,13723],[8351,13704],[8166,13530],[8152,13356],[8186,13217],[8274,13097],[8441,13024],[8608,13021],[8833,13021],[9004,13024],[9200,12934],[9265,12803],[9164,12687],[8953,12679],[8651,12788],[8419,12901],[8096,12944],[7834,12901],[7681,12817],[7572,12719]]);
         TreeManager.addTreeList([[8701,12905],[8915,12869],[7575,13159],[7854,13359],[7575,13490],[7705,13515],[7804,13762],[8733,14086],[7596,14955],[7593,15343],[8065,15154],[8032,15561],[7687,15816],[7963,16124],[8526,16244]]);
         TreeManager.addTreeList([[7725,13177],[8815,12872],[7693,13301],[7880,13565],[7666,13664],[8718,14093],[8832,14060],[7771,14830],[8034,14860],[7577,15101],[7631,15206],[7935,15470],[7761,15508],[7840,15637],[7975,15660],[7912,15944],[8084,15966],[8065,16104],[8305,16165],[8215,16290],[8445,16309],[8555,16307],[8116,16519],[8764,16590]]);
         BoulderManager.addBoulderList([[8470,12959],[8277,12970],[7932,13092],[7700,12983],[7838,13582],[7968,13680],[8128,14030],[8048,14455],[8237,14444],[8408,14324],[8869,14099],[7630,14831],[7666,15075],[7968,15253],[7586,15560],[7426,15498],[7706,16141],[7855,16253],[7891,16482],[8632,16424],[8407,16617],[8970,16511],[8364,15988]]);
         BoulderManager.addBoulderList([[9021,12928],[8950,12737],[8757,12955],[8584,12845],[8570,13004],[8202,13035],[7853,13006],[7951,13192],[7507,13045],[7461,13464],[7992,13428],[7682,14016],[8251,13875],[7989,14082],[8475,14193],[8201,14319],[7912,14415],[7809,14564],[8097,14661],[8618,14421],[8931,14327],[8615,14253],[8181,14769],[8124,15721],[7672,15980],[7760,16320],[8038,16437],[7758,16677],[8320,16579],[8367,16405],[8624,16677],[8777,16346],[8954,16587]]);
         
-        const island5water = new PIXI.Sprite(Environment.ISLAND5_UNDERWATER);
+        const island5water = new PIXI.Sprite(PIXI.Texture.EMPTY);
+        island5water.width = 4000;
+        island5water.height = 3000;
         island5water.filters = [Environment.surfaceColorShader];
         island5water.anchor.x = 0.5;
         island5water.anchor.y = 0.5;
@@ -167,7 +155,7 @@ class Environment {
         island5water.position.y = 400 / 0.04;
         island5water.visile = false;
         Renderer.underwaterBackground.addChild(island5water);
-        CullOptimizer.addPermanentSpriteAfterSetup(island5water);
+        CullOptimizer.addPermanentSpriteAfterSetup(island5water, 'assets/island5water.png');
         IslandManager.addIsland([[34178,8988],[34105,9057],[34087,9173],[34134,9290],[34251,9337],[34381,9304],[34461,9246],[34599,9250],[34708,9304],[34763,9377],[34879,9428],[35090,9442],[35206,9402],[35242,9315],[35224,9166],[35123,9061],[35014,8999],[34850,9032],[34752,9097],[34647,9141],[34523,9144],[34436,9104],[34352,9028],[34265,8988]]);
         IslandManager.addIsland([[35969,9053],[35991,9210],[35965,9391],[35958,9489],[35991,9544],[36071,9576],[36252,9595],[36452,9602],[36565,9624],[36685,9642],[36783,9616],[36812,9551],[36794,9453],[36735,9366],[36637,9319],[36561,9290],[36496,9202],[36427,9126],[36307,9050],[36118,9021],[35998,8999]]);
         IslandManager.addIsland([[34767,10063],[34567,10176],[34480,10281],[34396,10441],[34258,10539],[34091,10619],[33978,10692],[33975,10764],[34033,10815],[34167,10866],[34247,10921],[34367,10942],[34483,10917],[34621,10931],[34745,10971],[34839,10990],[34890,10942],[34868,10844],[34919,10710],[34985,10565],[34974,10427],[34974,10278],[34985,10092],[34861,10041]]);
@@ -177,7 +165,9 @@ class Environment {
         BoulderManager.addBoulderList([[34264,9143],[34340,9223],[34609,9223],[34849,9332],[36262,9448],[35895,10476],[36189,10411],[36000,10564],[36178,10734],[35975,10782],[34802,10353],[34613,10415],[34852,10636],[34558,10629],[34580,10771],[34289,10782]]);
         BoulderManager.addBoulderList([[34494,10699],[34401,10613],[34248,10683],[34479,10799],[34733,10758],[34732,10590],[34534,10500],[34727,10295],[34635,10243],[35831,10333],[36022,10335],[35817,10439],[35859,10631],[36105,10733],[36170,10572],[36278,10496],[36292,9306],[34983,9299]]);
         
-        const endIslandTopWater = new PIXI.Sprite(Environment.END_ISLAND_TOP_UNDERWATER);
+        const endIslandTopWater = new PIXI.Sprite(PIXI.Texture.EMPTY);
+        endIslandTopWater.width = 2000;
+        endIslandTopWater.height = 4000;
         endIslandTopWater.filters = [Environment.surfaceColorShader];
         endIslandTopWater.anchor.x = 0.5;
         endIslandTopWater.anchor.y = 0.5;
@@ -185,8 +175,10 @@ class Environment {
         endIslandTopWater.position.y = 403 / 0.04;
         endIslandTopWater.visile = false;
         Renderer.underwaterBackground.addChild(endIslandTopWater);
-        CullOptimizer.addPermanentSpriteAfterSetup(endIslandTopWater);
-        const endIslandBottomWater = new PIXI.Sprite(Environment.END_ISLAND_BOTTOM_UNDERWATER);
+        CullOptimizer.addPermanentSpriteAfterSetup(endIslandTopWater, 'assets/endisland-top-water.png');
+        const endIslandBottomWater = new PIXI.Sprite(PIXI.Texture.EMPTY);
+        endIslandBottomWater.width = 2000;
+        endIslandBottomWater.height = 4000;
         endIslandBottomWater.filters = [Environment.surfaceColorShader];
         endIslandBottomWater.anchor.x = 0.5;
         endIslandBottomWater.anchor.y = 0.5;
@@ -194,7 +186,7 @@ class Environment {
         endIslandBottomWater.position.y = endIslandTopWater.position.y + 4000;
         endIslandBottomWater.visile = false;
         Renderer.underwaterBackground.addChild(endIslandBottomWater);
-        CullOptimizer.addPermanentSpriteAfterSetup(endIslandBottomWater);
+        CullOptimizer.addPermanentSpriteAfterSetup(endIslandBottomWater, 'assets/endisland-bottom-water.png');
         IslandManager.addIsland([[51565,8711],[51391,8794],[51075,9019],[50871,9285],[50708,9593],[50610,9931],[50537,10280],[50472,10752],[50457,11546],[50486,12195],[50523,12945],[50570,13512],[50515,14181],[50494,14820],[50574,15101],[50831,15283],[51108,15392],[51507,15512],[51605,15526]]);
         WinManager.setWinZone([[51565,8711],[51391,8794],[51075,9019],[50871,9285],[50708,9593],[50610,9931],[50537,10280],[50472,10752],[50457,11546],[50486,12195],[50523,12945],[50570,13512],[50515,14181],[50494,14820],[50574,15101],[50831,15283],[51108,15392],[51507,15512],[51605,15526]]);
         
@@ -295,7 +287,7 @@ class Environment {
         const scaleX = Camera.scale.x * heightScale;
         const scaleY = Camera.scale.y * heightScale;
 
-        Environment.waterFilter.setOffset(Vec2.from(Camera.position.x * scaleX, -Camera.position.y * scaleY));
+        Environment.waterFilter.setOffset(Camera.position.x * scaleX, -Camera.position.y * scaleY);
         Environment.waterFilter.setTime(Environment.waterTime);
         Environment.waterTime += 1;
     }

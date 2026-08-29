@@ -107,22 +107,38 @@ class MainMenu {
             MainMenu.musicElement.classList.add('enabled');
         }
         
-        MainMenu.embedStream = new Twitch.Embed('actual-embed', {
+        MainMenu.resize();
+        MainMenu.refreshContent();
+        MainMenu.initializeStream();
+    }
+
+    static initializeStream() {
+        if (MainMenu.embedStream || !window.Twitch || !MainMenu.mainMenuVisible || !MainMenu.twitchStreamElement) {
+            return;
+        }
+
+        const embedStream = new Twitch.Embed('actual-embed', {
             width: 480,
             height: 270,
             muted: true,
             autoplay: true,
             layout: 'video',
             channel: 'kujukuju',
-            // only needed if your site is also embedded on embed.example.com and othersite.example.com
             parent: ['iogames.space', 'titotu.ru', 'iogames.fun', 'titotu.io', 'yandex.ru', 'io.games', 'io-games.io', 'games.crazygames.com', 'crazygames.com'],
         });
-        MainMenu.embedStream.addEventListener(Twitch.Player.OFFLINE, event => {
+        MainMenu.embedStream = embedStream;
+        embedStream.addEventListener(Twitch.Player.OFFLINE, event => {
+            if (MainMenu.embedStream !== embedStream) {
+                return;
+            }
             MainMenu.twitchStreamElement.style.display = 'none';
             MainMenu.streamOnline = false;
             MainMenu.resize();
         });
-        MainMenu.embedStream.addEventListener(Twitch.Player.ONLINE, event => {
+        embedStream.addEventListener(Twitch.Player.ONLINE, event => {
+            if (MainMenu.embedStream !== embedStream) {
+                return;
+            }
             MainMenu.twitchStreamElement.style.display = 'block';
             MainMenu.streamOnline = true;
 
@@ -131,9 +147,6 @@ class MainMenu {
 
             MainMenu.resize();
         });
-
-        MainMenu.resize();
-        MainMenu.refreshContent();
     }
 
     static update() {
@@ -153,6 +166,7 @@ class MainMenu {
                 MainMenu.aBottomLargeElement.classList.remove('playing');
                 MainMenu.aBottomSmallElement.classList.remove('wrongsize');
 
+                MainMenu.initializeStream();
                 MainMenu.refreshContent();
                 MainMenu.resize();
 
@@ -167,7 +181,13 @@ class MainMenu {
                 MainMenu.twitchStreamElement.classList.remove('visible');
                 MainMenu.steamElement.style.display = 'none';
                 MainMenu.linksElement.style.display = 'none';
-                MainMenu.embedStream.setMuted(true);
+                if (MainMenu.embedStream) {
+                    MainMenu.embedStream.setMuted(true);
+                    document.getElementById('actual-embed').replaceChildren();
+                    MainMenu.embedStream = null;
+                    MainMenu.streamOnline = false;
+                    MainMenu.twitchStreamElement.style.display = 'none';
+                }
 
                 MainMenu.aBottomLargeElement.classList.add('playing');
                 MainMenu.aBottomSmallElement.classList.add('wrongsize');

@@ -2,27 +2,23 @@ class Loop {
     static time = 0;
     static TICK = 16;
 
-    static lastTime = 0;
+    static lastFrameTime = null;
 
-    static loop() {
-        Loop.time = Date.now();
-        
-        while (Loop.time - Loop.lastTime < Loop.TICK) {
-            Loop.time = Date.now();
+    static loop(frameTime = performance.now()) {
+        window.requestAnimationFrame(Loop.loop);
+
+        if (Loop.lastFrameTime === null) {
+            Loop.lastFrameTime = frameTime - Loop.TICK;
         }
+
+        const elapsed = frameTime - Loop.lastFrameTime;
+        if (elapsed < Loop.TICK) {
+            return;
+        }
+        Loop.lastFrameTime = frameTime - elapsed % Loop.TICK;
+        Loop.time = Date.now();
 
         Logic.update();
         Renderer.render();
-
-        const finish = Date.now();
-        const duration = finish - Loop.time;
-
-        Loop.lastTime = Loop.time;
-
-        // is this okay to do or is the extra () => {} gonna stack overflow or something
-        window.requestAnimationFrame(Loop.loop);
-        // setTimeout(() => {
-        //     Loop.loop();
-        // }, Math.max(1, Loop.TICK - duration));
     }
 }

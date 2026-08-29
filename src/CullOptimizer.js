@@ -2,7 +2,7 @@ class CullOptimizer {
     static visibleSprites = [];
     static tree = new box2d.b2DynamicTree();
 
-    static addPermanentSpriteAfterSetup(sprite) {
+    static addPermanentSpriteAfterSetup(sprite, lazyTexturePath = null) {
         const minX = sprite.position.x - sprite.width * sprite.anchor.x;
         const minY = sprite.position.y - sprite.height * sprite.anchor.y;
         const maxX = sprite.position.x + sprite.width * (1 - sprite.anchor.x);
@@ -15,6 +15,7 @@ class CullOptimizer {
         aabb.upperBound.y = maxY;
 
         sprite.visible = false;
+        sprite.lazyTexturePath = lazyTexturePath;
 
         CullOptimizer.tree.CreateProxy(aabb, sprite);
     }
@@ -33,6 +34,10 @@ class CullOptimizer {
 
         CullOptimizer.tree.Query(node => {
             const sprite = node.userData;
+            if (sprite.lazyTexturePath) {
+                sprite.texture = PIXI.Texture.from(sprite.lazyTexturePath);
+                sprite.lazyTexturePath = null;
+            }
             sprite.visible = true;
             CullOptimizer.visibleSprites.push(sprite);
             return true;

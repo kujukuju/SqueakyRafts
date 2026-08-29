@@ -1,5 +1,7 @@
 class Connection {
-    static SERVER = 'server.squeakyrafts.io';
+    static SERVER = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+        ? 'ws://' + location.hostname + ':5050'
+        : 'wss://server.squeakyrafts.io:50505';
 
     static socket;
     static retryTimeout;
@@ -19,7 +21,7 @@ class Connection {
             return;
         }
 
-        Connection.socket = new WebSocket('wss://' + Connection.SERVER + ':50505');
+        Connection.socket = new WebSocket(Connection.SERVER);
         Connection.socket.binaryType = 'arraybuffer';
         Connection.socket.addEventListener('open', (event) => {
             Connection.onOpen(event);
